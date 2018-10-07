@@ -5,9 +5,43 @@
     <description>关于跑步和代码 | 满硕泉，Software Engineer，业余马拉松选手，8小时外技术作家，编外MBA | 这里是满硕泉 的个人博客，和你聊聊我的最爱，跑步和代码。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 05 Oct 2018 17:12:16 +0800</pubDate>
-    <lastBuildDate>Fri, 05 Oct 2018 17:12:16 +0800</lastBuildDate>
+    <pubDate>Sun, 07 Oct 2018 14:35:20 +0800</pubDate>
+    <lastBuildDate>Sun, 07 Oct 2018 14:35:20 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>XML的BOM编码解析异常</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“这里，全新的开始”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;写在前面&quot;&gt;写在前面&lt;/h2&gt;
+
+&lt;p&gt;2018年十月份，我开通了我的全新技术博客，在2018年之前，我是一个手机游戏程序员，之前的技术文章主要聚焦在游戏开发上，&lt;a href=&quot;https://blog.csdn.net/bill_man&quot;&gt;关注我之前的文章可以到我的csdn博客上&lt;/a&gt;，在这里，我会站在一个移动跨平台开发者的角度进行写一些技术文章，包括安卓，iOS和HTML5等内容，未来对自己的技术规划也是大前端工程师，另外我也会继续关注游戏底层图形渲染技术，同时这里还会积累一些我现在涉及的业务文章，目前我主要做的是文档编码处理和文字排版的业务，所以这里也会写一些文档和排版相关的技术文档。同时，我希望这里不单单是一个技术博客，作为一个业余马拉松爱好者，我还会把一些自己跑步的心得pull在这里，所以我把我的全新博客命名为“跑.码”，和你聊聊我的人生两大爱好-跑步和代码。&lt;/p&gt;
+
+&lt;h2 id=&quot;字符编码&quot;&gt;字符编码&lt;/h2&gt;
+
+&lt;p&gt;字符编码是把字符集中的字符编码指定对应集合中的某一对象，这样集合中的对象就可以变为数字编码在计算机中存储，同时也可以通过网络通讯传递。早期的字符编码包括ASCII和EBCDIC，尤其ASCII得到了广泛采用，几乎所有个人计算机都使用ASCII，它分为两个集合：128个字符的标准ASCII码和附加的128个字符的扩充和ASCII码。为了扩充ASCII编码，以用于显示本国的语言，不同的国家和地区制定了不同的标准，由此产生了 GB2312, BIG5, JIS 等各自的编码标准。这些使用 2 个字节来代表一个字符的各种汉字延伸编码方式，称为 ANSI 编码，又称为”MBCS（Muilti-Bytes Charecter Set，多字节字符集）”。在简体中文系统下，ANSI 编码代表 GB2312 编码，在日文操作系统下，ANSI 编码代表 JIS 编码，所以在中文 windows下要转码成gb2312,gbk只需要把文本保存为ANSI 编码即可。
+   简单而言，就是要把中文对应为对应的ASCII码，GB的意思是国标，GB2312和GBK主要用于汉字的编码，而UTF-8是全世界通用的。需要注意的是，GBK、GB2312等与UTF8之间都必须通过Unicode编码才能相互转换，使用UTF-8的优势是其他地区的用户无需安装简体中文支持也不会出现乱码。&lt;/p&gt;
+
+&lt;h2 id=&quot;utf-8&quot;&gt;UTF-8&lt;/h2&gt;
+
+&lt;p&gt;UTF-8是一种针对Unicode的可变长度字符编码，UTF-8编码规则：如果只有一个字节则其最高二进制位为0；如果是多字节，其第一个字节从最高位开始，连续的二进制位值为1的个数决定了其编码的字节数，其余各字节均以10开头。如果Unicode字符由2个字节表示，则编码成UTF-8很可能需要3个字节。而如果Unicode字符由4个字节表示，则编码成UTF-8可能需要6个字节。&lt;/p&gt;
+
+&lt;h2 id=&quot;bom头&quot;&gt;BOM头&lt;/h2&gt;
+&lt;p&gt;最早发现BOM头这个问题，是由于我在做XML解析的时候，遇到了一个文件，打开看都正常，但是使用libxml2库进行解析的时候，一直报解析错误，找不到起始的“&amp;lt;”,但是用sublime打开，第一个字符就是“&amp;lt;”，后来用Notepad打开才发现了前面几个字节有“异常”，也就是BOM头。
+   BOM（Byte Order Mark），字节序标记，在Windows系统上，某些工具创建的XML是带有BOM头的，需要注意的是BOM头是Windows系统的习惯，在其他的系统上一般不会使用这种编码，带BOM头的“空”文件会占三个字节大小。UCS是国际标准化组织iso开展的ISO/IEC 10646项目定义的编码，在UCS编码中有一个叫做”ZERO WIDTH NO-BREAK SPACE“的字符，它的编码是FEFF，而FFFE在UCS中是不存在的字符，不出现在实际传输中。如果接收者收到FEFF，就表明这个字节流是大字节序的；如果收到FFFE，就表明这个字节流是小字节序的。UTF-8中并不用BOM表明字节顺序，而是表明编码方式。字符”ZERO WIDTH NO-BREAK SPACE“的UTF-8编码是EF BB BF。所以如果打开文件发现EF BB BF开头的字节流，就知道这是UTF-8编码了，但是需要说明的是，这种表明并不是必须的。
+   因为有BOM头的存在，需要你在处理的时候先判断一下前三个字节是不是EF BB BF，如果有BOM头的话需要跳过去，才能正确的读取文件该有的内容。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 06 Oct 2018 04:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/10/06/utf8bom-2018/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/06/utf8bom-2018/</guid>
+        
+        <category>文档格式</category>
+        
+        
+      </item>
     
   </channel>
 </rss>
