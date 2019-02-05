@@ -11,29 +11,29 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="XML的BOM编码解析异常 - 闪硕的博客 | 跑.码">
+    <meta property="og:title" content="opencv学习笔记1 - 闪硕的博客 | 跑.码">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="
-  “这里，全新的开始”
+  “我们的目标是星辰大海”
 
 
 ">
     
-    <meta property="article:published_time" content="2018-10-06T04:00:00Z">
+    <meta property="article:published_time" content="2019-02-06T06:00:00Z">
     
     
     <meta property="article:author" content="Manshuoquan">
     
     
-    <meta property="article:tag" content="文档格式">
+    <meta property="article:tag" content="图像处理;OpenCV;人工智能">
     
     
     <meta property="og:image" content="http://localhost:4000/img/956576417.jpg">
-    <meta property="og:url" content="http://localhost:4000/2018/10/06/utf8bom-2018/">
+    <meta property="og:url" content="http://localhost:4000/2019/02/06/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%B5%B7%E8%88%AA/">
     <meta property="og:site_name" content="闪硕的博客 | 跑.码">
     
-    <title>XML的BOM编码解析异常 - 闪硕的博客 | 跑.码</title>
+    <title>opencv学习笔记1 - 闪硕的博客 | 跑.码</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -42,7 +42,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/10/06/utf8bom-2018/">
+    <link rel="canonical" href="http://localhost:4000/2019/02/06/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%B5%B7%E8%88%AA/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -185,15 +185,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#文档格式" title="文档格式">文档格式</a>
+                        <a class="tag" href="/tags/#图像处理;OpenCV;人工智能" title="图像处理;OpenCV;人工智能">图像处理;OpenCV;人工智能</a>
                         
                     </div>
-                    <h1>XML的BOM编码解析异常</h1>
+                    <h1>opencv学习笔记1</h1>
                     
                     
-                    <h2 class="subheading"></h2>
+                    <h2 class="subheading">起航</h2>
                     
-                    <span class="meta">Posted by Manshuoquan on October 6, 2018</span>
+                    <span class="meta">Posted by Manshuoquan on February 6, 2019</span>
                 </div>
             </div>
         </div>
@@ -214,26 +214,49 @@
                 
 
 				<blockquote>
-  <p>“这里，全新的开始”</p>
+  <p>“我们的目标是星辰大海”</p>
 </blockquote>
 
-<h2 id="写在前面">写在前面</h2>
+<h1 id="计算机视觉">计算机视觉</h1>
+<p> 计算机视觉是指用摄影机和电脑代替人眼对目标进行识别、跟踪和测量等机器视觉，并进一步做图形处理，使电脑处理成为更适合人眼观察或传送给仪器检测的图像。它可以将静止的图像或者视频数据转换为一种决策或者新的表示，简而言之，这就是一门指导机器如何“看”的技术。<br />
+ 计算机视觉既是工程领域，也是科学领域中的一个富有挑战性重要研究领域。计算机视觉是一门综合性的学科，视觉是各个应用领域，如制造业、检验、文档分析、医疗诊断，和军事等领域中各种智能/自主系统中不可分割的一部分。</p>
+<h1 id="opencv">OpenCV</h1>
+<p> OpenCV是一个开源的计算机视觉库，它采用C和C++进行编写。可以在Windows、Linux、Mac OS X等系统运行，另外也提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。<br />
+ OpenCV用于进行高效计算，强调实时性的应用开发，可以享受多核处理器的优势，另外也提供了收费的性能基元库（IPP）可以应用英特尔架构上的自动优化。<br />
+ 在不断的迭代的过程中，OpenCV提供了500多个累积了API，个人理解OpenCV其实是一个算法集合或者是算法库，像是一个兵器库，而我们的的学习就是要掌握这“十八般兵刃”的使用方法。<br />
+ 2018年底，OpenCV已经更新到4.0.0版本，官方网址是https://opencv.org。<br />
+ OpenCV的宗旨是促进商业和研究，它是开源免费的，它采用BSD开源证书，也就是说可以自由的使用，修改源代码，也可以将修改后的代码作为开源或者专有软件再发布。</p>
+<h1 id="下载和安装opencv">下载和安装OpenCV</h1>
+<p> 笔者使用Mac OS X系统进行开发，所以除非特别说明，这个系列的文章全部在Mac+Xcode环境下进行开发，OpenCV采用Git作为版本管理工具，使用Cmake来构建工程（关于Cmake，是一个庞大的话题，本博将开另外一个专栏详细介绍），一般情况下，你可以直接使用编译好的库直接进行开发，但是当你需要自己修改OpenCV时，你就需要详细了解它的编译方法了，不过这部分我们放在专栏的靠后部分再详细介绍。<br />
+ 首先需要进行一些环境配置，下载和配置Homebrew，homebrew是一款Mac OS平台下的软件包管理工具，可以安装卸载和更新软件包的功能，关于Homebrew的安装和使用可以参考这篇文章<a href="https://www.jianshu.com/p/117424d09d4c">Homebrew 的安装和使用</a><br />
+ 第二步要下载OpenCV，可以通过github下载最新版，也可以去官方网站下载稳定版本，更方便的方法是使用Homebrew下载，在终端中使用“brew install opencv”命令安装OpenCV，目前安装的是3.4.3_1版本。<br />
+ 然后就是在Xcode中新建一个命令行C++项目，如图所示:<br />
+<img src="../../../../img/opencv1-1.png" alt="avatar" /><br />
+新建完项目，就需要在项目配置中的“building Settings”中的“Search Paths”中的“Header Search Paths”和“Library Search Paths”中配置引用路径，如图所示：<br />
+<img src="../../../../img/opencv1-2.png" alt="avatar" /><br />
+然后把OpenCV目录下的lib文件目录复制到项目下并导入即可，这个过程可能会在编译中报对应的库的错误，这个库可能是软链接过去的，把它删掉即可<br />
+最后在main中编写测试代码，测试代码如下：
+` `</p>
 
-<p>2018年十月份，我开通了我的全新技术博客，在2018年之前，我是一个手机游戏程序员，之前的技术文章主要聚焦在游戏开发上，<a href="https://blog.csdn.net/bill_man">关注我之前的文章可以到我的csdn博客上</a>，在这里，我会站在一个移动跨平台开发者的角度进行写一些技术文章，包括安卓，iOS和HTML5等内容，未来对自己的技术规划也是大前端工程师，另外我也会继续关注游戏底层图形渲染技术，同时这里还会积累一些我现在涉及的业务文章，目前我主要做的是文档编码处理和文字排版的业务，所以这里也会写一些文档和排版相关的技术文档。同时，我希望这里不单单是一个技术博客，作为一个业余马拉松爱好者，我还会把一些自己跑步的心得pull在这里，所以我把我的全新博客命名为“跑.码”，和你聊聊我的人生两大爱好-跑步和代码。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;stdio.h&gt;
+#include &lt;opencv2/opencv.hpp&gt;
 
-<h2 id="字符编码">字符编码</h2>
+using namespace cv;
 
-<p>字符编码是把字符集中的字符编码指定对应集合中的某一对象，这样集合中的对象就可以变为数字编码在计算机中存储，同时也可以通过网络通讯传递。早期的字符编码包括ASCII和EBCDIC，尤其ASCII得到了广泛采用，几乎所有个人计算机都使用ASCII，它分为两个集合：128个字符的标准ASCII码和附加的128个字符的扩充和ASCII码。为了扩充ASCII编码，以用于显示本国的语言，不同的国家和地区制定了不同的标准，由此产生了 GB2312, BIG5, JIS 等各自的编码标准。这些使用 2 个字节来代表一个字符的各种汉字延伸编码方式，称为 ANSI 编码，又称为”MBCS（Muilti-Bytes Charecter Set，多字节字符集）”。在简体中文系统下，ANSI 编码代表 GB2312 编码，在日文操作系统下，ANSI 编码代表 JIS 编码，所以在中文 windows下要转码成gb2312,gbk只需要把文本保存为ANSI 编码即可。
-   简单而言，就是要把中文对应为对应的ASCII码，GB的意思是国标，GB2312和GBK主要用于汉字的编码，而UTF-8是全世界通用的。需要注意的是，GBK、GB2312等与UTF8之间都必须通过Unicode编码才能相互转换，使用UTF-8的优势是其他地区的用户无需安装简体中文支持也不会出现乱码。</p>
-
-<h2 id="utf-8">UTF-8</h2>
-
-<p>UTF-8是一种针对Unicode的可变长度字符编码，UTF-8编码规则：如果只有一个字节则其最高二进制位为0；如果是多字节，其第一个字节从最高位开始，连续的二进制位值为1的个数决定了其编码的字节数，其余各字节均以10开头。如果Unicode字符由2个字节表示，则编码成UTF-8很可能需要3个字节。而如果Unicode字符由4个字节表示，则编码成UTF-8可能需要6个字节。</p>
-
-<h2 id="bom头">BOM头</h2>
-<p>最早发现BOM头这个问题，是由于我在做XML解析的时候，遇到了一个文件，打开看都正常，但是使用libxml2库进行解析的时候，一直报解析错误，找不到起始的“&lt;”,但是用sublime打开，第一个字符就是“&lt;”，后来用Notepad打开才发现了前面几个字节有“异常”，也就是BOM头。
-   BOM（Byte Order Mark），字节序标记，在Windows系统上，某些工具创建的XML是带有BOM头的，需要注意的是BOM头是Windows系统的习惯，在其他的系统上一般不会使用这种编码，带BOM头的“空”文件会占三个字节大小。UCS是国际标准化组织iso开展的ISO/IEC 10646项目定义的编码，在UCS编码中有一个叫做”ZERO WIDTH NO-BREAK SPACE“的字符，它的编码是FEFF，而FFFE在UCS中是不存在的字符，不出现在实际传输中。如果接收者收到FEFF，就表明这个字节流是大字节序的；如果收到FFFE，就表明这个字节流是小字节序的。UTF-8中并不用BOM表明字节顺序，而是表明编码方式。字符”ZERO WIDTH NO-BREAK SPACE“的UTF-8编码是EF BB BF。所以如果打开文件发现EF BB BF开头的字节流，就知道这是UTF-8编码了，但是需要说明的是，这种表明并不是必须的。
-   因为有BOM头的存在，需要你在处理的时候先判断一下前三个字节是不是EF BB BF，如果有BOM头的话需要跳过去，才能正确的读取文件该有的内容。</p>
+int main()
+{
+    Mat image = imread("956576417.jpg");// 测试图片路径
+    if ( !image.data )
+    {
+        printf("No image data \n");
+        return -1;
+    }
+    namedWindow("Display Image", WINDOW_AUTOSIZE );
+    imshow("Display Image", image);
+    waitKey(0);
+    return 0;
+} ` `   下一篇将介绍OpenCV中的数据结构和它们的使用方式。
+</code></pre></div></div>
 
 
 
@@ -241,13 +264,13 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2019/02/06/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%B5%B7%E8%88%AA/" data-toggle="tooltip" data-placement="top" title="opencv学习笔记1">
-                        Next<br>
-                        <span>opencv学习笔记1</span>
+                    <li class="previous">
+                        <a href="/2018/10/06/utf8bom-2018/" data-toggle="tooltip" data-placement="top" title="XML的BOM编码解析异常">
+                        Previous<br>
+                        <span>XML的BOM编码解析异常</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -337,8 +360,8 @@ gitment.render('container')
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "manshuoquan";
-    var disqus_identifier = "/2018/10/06/utf8bom-2018";
-    var disqus_url = "http://localhost:4000/2018/10/06/utf8bom-2018/";
+    var disqus_identifier = "/2019/02/06/opencv学习笔记-起航";
+    var disqus_url = "http://localhost:4000/2019/02/06/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%B5%B7%E8%88%AA/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
